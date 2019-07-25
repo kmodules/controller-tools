@@ -68,6 +68,16 @@ var KnownPackages = map[string]PackageOverride{
 		}
 		// No point in calling AddPackage, this is the sole inhabitant
 	},
+
+	"github.com/appscode/go/encoding/json/types": func(p *Parser, pkg *loader.Package) {
+		p.Schemata[TypeIdent{Name: "IntHash", Package: pkg}] = apiext.JSONSchemaProps{
+			Type: "string",
+		}
+		p.Schemata[TypeIdent{Name: "StrYo", Package: pkg}] = apiext.JSONSchemaProps{
+			Type: "string",
+		}
+		// No point in calling AddPackage, this is the sole inhabitant
+	},
 }
 
 // AddKnownTypes registers the packages overrides in KnownPackages with the given parser.
