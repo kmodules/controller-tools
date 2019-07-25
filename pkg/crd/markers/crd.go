@@ -187,7 +187,12 @@ type Resource struct {
 }
 
 func (s Resource) ApplyToCRD(crd *apiext.CustomResourceDefinitionSpec, version string) error {
-	crd.Names.Plural = s.Path
+	if s.Path != "" {
+		crd.Names.Plural = s.Path
+	}
+	if s.Singular != "" {
+		crd.Names.Singular = s.Singular
+	}
 	crd.Names.ShortNames = s.ShortName
 	crd.Names.Categories = s.Categories
 
