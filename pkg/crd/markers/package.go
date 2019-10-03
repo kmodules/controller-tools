@@ -26,5 +26,6 @@ func init() {
 		markers.Must(markers.MakeDefinition("versionName", markers.DescribesPackage, "")),
 		markers.Must(markers.MakeDefinition("kubebuilder:validation:Optional", markers.DescribesPackage, struct{}{})),
 		markers.Must(markers.MakeDefinition("kubebuilder:validation:Required", markers.DescribesPackage, struct{}{})),
+		markers.Must(markers.MakeDefinition("kubebuilder:skip", markers.DescribesPackage, struct{}{})),
 	)
 }
