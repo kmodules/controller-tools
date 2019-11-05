@@ -403,6 +403,8 @@ func builtinToType(basic *types.Basic) (typ string, format string, err error) {
 		typ = "string"
 	case basicInfo&types.IsInteger != 0:
 		typ = "integer"
+	case basicInfo&types.IsFloat != 0:
+		typ = "number"
 	default:
 		// NB(directxman12): floats are *NOT* allowed in kubernetes APIs
 		return "", "", fmt.Errorf("unsupported type %q", basic.String())
@@ -413,6 +415,8 @@ func builtinToType(basic *types.Basic) (typ string, format string, err error) {
 		format = "int32"
 	case types.Int64, types.Uint64:
 		format = "int64"
+	case types.Float32, types.Float64:
+		format = "float"
 	}
 
 	return typ, format, nil
