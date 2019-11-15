@@ -82,7 +82,7 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 		if g.TrivialVersions {
 			toTrivialVersions(&crd)
 		}
-		addAttribution(&crd)
+		// addAttribution(&crd)
 		fileName := fmt.Sprintf("%s_%s.yaml", crd.Spec.Group, crd.Spec.Names.Plural)
 		if err := ctx.WriteYAML(fileName, crd); err != nil {
 			return err
