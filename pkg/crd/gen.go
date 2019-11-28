@@ -132,7 +132,7 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 	for groupKind := range kubeKinds {
 		parser.NeedCRDFor(groupKind, g.MaxDescLen)
 		crdRaw := parser.CustomResourceDefinitions[groupKind]
-		addAttribution(&crdRaw)
+		// addAttribution(&crdRaw)
 
 		// Prevent the top level metadata for the CRD to be generate regardless of the intention in the arguments
 		FixTopLevelMetadata(crdRaw)
