@@ -127,7 +127,7 @@ func (g Generator) Generate(ctx *genall.GenerationContext) error {
 	for groupKind := range kubeKinds {
 		parser.NeedCRDFor(groupKind, g.MaxDescLen)
 		crdRaw := parser.CustomResourceDefinitions[groupKind]
-		addAttribution(&crdRaw)
+		// addAttribution(&crdRaw)
 
 		versionedCRDs := make([]interface{}, len(crdVersions))
 		for i, ver := range crdVersions {
