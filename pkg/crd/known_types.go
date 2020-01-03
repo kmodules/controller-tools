@@ -95,16 +95,35 @@ var KnownPackages = map[string]PackageOverride{
 		p.Schemata[TypeIdent{Name: "JSON", Package: pkg}] = apiext.JSONSchemaProps{
 			XPreserveUnknownFields: boolPtr(true),
 		}
+		p.Schemata[TypeIdent{Name: "JSONSchemaPropsOrArray", Package: pkg}] = apiext.JSONSchemaProps{
+			XPreserveUnknownFields: boolPtr(true),
+		}
+		p.Schemata[TypeIdent{Name: "JSONSchemaPropsOrBool", Package: pkg}] = apiext.JSONSchemaProps{
+			XPreserveUnknownFields: boolPtr(true),
+		}
+		p.Schemata[TypeIdent{Name: "JSONSchemaPropsOrStringArray", Package: pkg}] = apiext.JSONSchemaProps{
+			XPreserveUnknownFields: boolPtr(true),
+		}
 		p.AddPackage(pkg) // get the rest of the types
 	},
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1": func(p *Parser, pkg *loader.Package) {
 		p.Schemata[TypeIdent{Name: "JSON", Package: pkg}] = apiext.JSONSchemaProps{
 			XPreserveUnknownFields: boolPtr(true),
 		}
+		p.Schemata[TypeIdent{Name: "JSONSchemaPropsOrArray", Package: pkg}] = apiext.JSONSchemaProps{
+			XPreserveUnknownFields: boolPtr(true),
+		}
+		p.Schemata[TypeIdent{Name: "JSONSchemaPropsOrBool", Package: pkg}] = apiext.JSONSchemaProps{
+			XPreserveUnknownFields: boolPtr(true),
+		}
+		p.Schemata[TypeIdent{Name: "JSONSchemaPropsOrStringArray", Package: pkg}] = apiext.JSONSchemaProps{
+			XPreserveUnknownFields: boolPtr(true),
+		}
 		p.AddPackage(pkg) // get the rest of the types
 	},
 }
 
+//nolint:unparam
 func boolPtr(b bool) *bool {
 	return &b
 }
