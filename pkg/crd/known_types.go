@@ -119,6 +119,13 @@ var KnownPackages = map[string]PackageOverride{
 		}
 		p.AddPackage(pkg) // get the rest of the types
 	},
+
+	"gomodules.xyz/encoding/json/types": func(p *Parser, pkg *loader.Package) {
+		p.Schemata[TypeIdent{Name: "IntHash", Package: pkg}] = apiext.JSONSchemaProps{
+			Type: "string",
+		}
+		p.AddPackage(pkg) // get the rest of the types
+	},
 }
 
 // ObjectMetaPackages overrides the ObjectMeta in all types
