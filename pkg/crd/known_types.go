@@ -135,6 +135,16 @@ var KnownPackages = map[string]PackageOverride{
 		}
 		p.AddPackage(pkg) // get the rest of the types
 	},
+
+	"kubedb.dev/apimachinery/apis/ui/v1alpha1": func(p *Parser, pkg *loader.Package) {
+		p.Schemata[TypeIdent{Name: "NodesStatsIndex", Package: pkg}] = apiext.JSONSchemaProps{
+			// this is a recursive structure that can't be flattened or, for that matter, properly generated.
+			// so just treat it as an arbitrary map
+			Type:                 "object",
+			AdditionalProperties: &apiext.JSONSchemaPropsOrBool{Allows: true},
+		}
+		p.AddPackage(pkg) // get the rest of the types
+	},
 }
 
 // ObjectMetaPackages overrides the ObjectMeta in all types
