@@ -108,6 +108,10 @@ var KnownPackages = map[string]PackageOverride{
 		p.Schemata[TypeIdent{Name: "JSON", Package: pkg}] = apiext.JSONSchemaProps{
 			XPreserveUnknownFields: ptr.To(true),
 		}
+		p.Schemata[TypeIdent{Name: "JSONSchemaProps", Package: pkg}] = apiext.JSONSchemaProps{
+			Type:                   "object",
+			XPreserveUnknownFields: ptr.To(true),
+		}
 		p.Schemata[TypeIdent{Name: "JSONSchemaPropsOrArray", Package: pkg}] = apiext.JSONSchemaProps{
 			XPreserveUnknownFields: ptr.To(true),
 		}
