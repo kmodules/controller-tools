@@ -139,6 +139,14 @@ var KnownPackages = map[string]PackageOverride{
 		p.AddPackage(pkg) // get the rest of the types
 	},
 
+	"kmodules.xyz/client-go/api/v1": func(p *Parser, pkg *loader.Package) {
+		p.Schemata[TypeIdent{Name: "TimeOfDay", Package: pkg}] = apiext.JSONSchemaProps{
+			Type:   "string",
+			Format: "time",
+		}
+		p.AddPackage(pkg) // get the rest of the types
+	},
+
 	"kubedb.dev/apimachinery/apis/ui/v1alpha1": func(p *Parser, pkg *loader.Package) {
 		p.Schemata[TypeIdent{Name: "NodesStatsIndex", Package: pkg}] = apiext.JSONSchemaProps{
 			// this is a recursive structure that can't be flattened or, for that matter, properly generated.
