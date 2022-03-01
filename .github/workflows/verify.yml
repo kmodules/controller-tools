@@ -3,14 +3,17 @@ name: PR Verifier
 on:
   pull_request_target:
     types: [opened, edited, reopened]
-
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
     name: verify PR contents
     steps:
-    - name: Verifier action
-      id: verifier
-      uses: kubernetes-sigs/kubebuilder-release-tools@v0.1.1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verifier action
+        id: verifier
+        uses: kubernetes-sigs/kubebuilder-release-tools@v0.1.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
