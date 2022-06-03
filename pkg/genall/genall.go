@@ -26,8 +26,10 @@ import (
 	"golang.org/x/tools/go/packages"
 	rawyaml "gopkg.in/yaml.v2"
 
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"sigs.k8s.io/controller-tools/pkg/loader"
 	"sigs.k8s.io/controller-tools/pkg/markers"
+	"sigs.k8s.io/yaml"
 )
 
 // Generators are a list of Generators.
@@ -144,11 +146,29 @@ func (g GenerationContext) WriteYAML(itemPath string, objs []interface{}, option
 	defer out.Close()
 
 	for _, obj := range objs {
-		yamlContent, err := yamlMarshal(obj, options...)
+		jsonBytes, err := json.Marshal(obj)
 		if err != nil {
 			return err
 		}
-		n, err := out.Write(append([]byte("---\n"), yamlContent...))
+
+		var r unstructured.Unstructured
+		if err := json.Unmarshal(jsonBytes, &r.Object); err != nil {
+			return err
+		}
+
+		unstructured.RemoveNestedField(r.Object, "status")
+
+		jsonBytes, err = json.MarshalIndent(r.Object, "", "    ")
+		if err != nil {
+			return err
+		}
+
+		yamlContent, err := yaml.JSONToYAML(jsonBytes)
+		if err != nil {
+			return err
+		}
+
+		n, err := out.Write(append([]byte("\n---\n"), yamlContent...))
 		if err != nil {
 			return err
 		}
